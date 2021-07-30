@@ -33,8 +33,18 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
+  try {
+    if(!req.body.category_name) {
+      res.status(400).json({ message: "Missing a category name!" });
+      return;
+    }
+    await Category.create(req.body);
+    res.status(200).json({ message: `Created new category: ${req.body.category_name}`});
+  } catch (e) {
+    res.status(500).json(e);
+  }
 });
 
 router.put('/:id', (req, res) => {
