@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
       include: [{ model: Tag }, { model: Category }]
     });
     const products = productData.map(product => product.toJSON());
-    console.log(products);
     res.status(200).json(products);
   } catch (e) {
     res.status(500).json(e);
@@ -20,9 +19,23 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  try {
+    const IdProductData = await Product.findByPk(req.params.id, {
+      include: [{ model: Tag }, { model: Category }]
+    });
+
+    if(!IdProductData) {
+      res.status(404).json({ message: "No product with that ID!"})
+    }
+
+    const product = IdProductData.toJSON();
+    res.status(200).json(product);
+  } catch (e) {
+    res.status(500).json(e);
+  }
 });
 
 // create new product
