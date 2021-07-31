@@ -17,4 +17,4 @@ Download the package and follow the video tutorial linked below.
 Have questions? Feel free to contact me through my [GithHub profile](https://github.com/buneroskoviche).
 
 ## Tutorial
-Video tutorial can be found [here]().
+Video tutorial can be found [here](https://youtu.be/EYdaPiEor_w).
